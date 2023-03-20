@@ -1,4 +1,5 @@
 const mongodb = require("mongodb");
+
 const db = require("../data/database");
 
 class Product {
@@ -22,7 +23,6 @@ class Product {
             error.code = 404;
             throw error;
         }
-
         const product = await db
             .getDb()
             .collection("products")
@@ -33,6 +33,7 @@ class Product {
             error.code = 404;
             throw error;
         }
+
         return new Product(product);
     }
 
@@ -78,12 +79,16 @@ class Product {
         } else {
             await db.getDb().collection("products").insertOne(productData);
         }
+    }
 
-        replaceImage(newImage);
-        {
-            this.image = newImage;
-            this.updateImageData();
-        }
+    replaceImage(newImage) {
+        this.image = newImage;
+        this.updateImageData();
+    }
+
+    remove() {
+        const productId = new mongodb.ObjectId(this.id);
+        return db.getDb().collection("products").deleteOne({ _id: productId });
     }
 }
 
