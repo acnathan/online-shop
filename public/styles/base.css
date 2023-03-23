@@ -115,3 +115,11 @@ a {
     margin: var(--space-2) 0;
     text-align: center;
 }
+
+.badge {
+    margin-left: var(--space-2);
+    padding: 0.15rem var(--space-3);
+    border-radius: 10rem;
+    background-color: var(--color-primary-500);
+    color: var(--color-primary-500-contrast);
+}
